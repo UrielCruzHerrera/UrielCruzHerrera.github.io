@@ -1,0 +1,20 @@
+<!-- Si ya cargaron los datos, mostramos la tarjeta -->
+@if (header) {
+  <div class="tarjeta-perfil">
+    <h1>{{ header.name }}</h1>
+    <h3>{{ header.goalLife }}</h3>
+    
+    <!-- Asegúrate de que photoUrl ya no tenga etiquetas <a> -->
+    @if (header.photoUrl) {
+      <img [src]="header.photoUrl" alt="Foto de {{ header.name }}" width="150" height="150">
+    }
+
+    <p><strong>Email:</strong> {{ header.email }}</p>
+    <p><strong>Teléfono:</strong> {{ header.phoneNumber }}</p>
+    <p><strong>Ubicación:</strong> {{ header.location }}</p>
+    <p><strong>Red social:</strong> {{ header.socialNetwork }}</p>
+  </div>
+} @else {
+  <!-- Mientras Firebase responde -->
+  <p>Cargando información del perfil...</p>
+}

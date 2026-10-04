@@ -1,0 +1,24 @@
+@if (skills.length > 0) {
+  <div class="skills-container">
+    @for (skill of skills; track skill.id) {
+      <div class="skill-card">
+        
+        <!-- Nombre de la habilidad -->
+        <h3>{{ skill.name }}</h3>
+        
+        <!-- Categoría (ej. Frontend, Backend, Herramientas) -->
+        <p class="skill-category">
+          <strong>Categoría:</strong> {{ skill.category }}
+        </p>
+        
+        <!-- Nivel (ej. Básico, Intermedio, Avanzado) -->
+        <p class="skill-level">
+          <strong>Nivel:</strong> {{ skill.level }}
+        </p>
+
+      </div>
+    }
+  </div>
+} @else {
+  <p>Cargando habilidades o no hay registros disponibles.</p>
+}

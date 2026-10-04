@@ -1,0 +1,24 @@
+@if (certificates.length > 0) {
+  <div class="certificates-container">
+    @for (certificate of certificates; track certificate.id) {
+      <div class="certificate-card">
+        
+        <!-- Título del certificado -->
+        <h3>{{ certificate.title }}</h3>
+        
+        <!-- Emisor (ej. Universidad, Coursera, etc.) -->
+        <p class="certificate-issuer">
+          <strong>Emisor:</strong> {{ certificate.issuer }}
+        </p>
+        
+        <!-- Fecha de emisión -->
+        <p class="certificate-date">
+          <strong>Fecha de emisión:</strong> {{ certificate.issue_date }}
+        </p>
+
+      </div>
+    }
+  </div>
+} @else {
+  <p>Cargando certificados o no hay registros disponibles.</p>
+}

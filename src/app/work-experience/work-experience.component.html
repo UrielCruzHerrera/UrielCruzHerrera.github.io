@@ -1,0 +1,13 @@
+@if (workExperiences.length > 0) {
+  <!-- Usamos @for en lugar de *ngFor -->
+  @for (workExperience of workExperiences; track workExperience.id) {
+    <div class="work-experience-item">
+      <h3>{{ workExperience.position }} at {{ workExperience.company }}</h3>
+      <p>{{ workExperience.startDate }} - {{ workExperience.endDate }}</p>
+      <p>{{ workExperience.accomplishment }}</p>
+      <p>{{ workExperience.location }}</p>
+    </div>
+  }
+} @else {
+  <p>No work experiences found.</p>
+}

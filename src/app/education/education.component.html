@@ -1,0 +1,28 @@
+@if (educations.length > 0) {
+  <div class="education-container">
+    @for (education of educations; track education.id) {
+      <div class="education-item">
+        
+        <!-- Título principal: El título del grado y la escuela -->
+        <h3>{{ education.fp_title }} en {{ education.schoolName }}</h3>
+        
+        <!-- Detalles de la formación profesional -->
+        <h4>{{ education.fp_nivel }} - {{ education.vocational_family }}</h4>
+        
+        <!-- Fechas -->
+        <p class="dates">
+          <strong>Fechas:</strong> 
+          {{ education.startDate }} 
+          @if (education.endDate) {
+            - {{ education.endDate }}
+          } @else {
+            - Actualidad
+          }
+        </p>
+
+      </div>
+    }
+  </div>
+} @else {
+  <p>Cargando información académica o no hay registros disponibles.</p>
+}

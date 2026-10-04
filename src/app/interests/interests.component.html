@@ -1,0 +1,19 @@
+@if (interests.length > 0) {
+  <div class="interests-container">
+    @for (interest of interests; track interest.id) {
+      <div class="interest-card">
+        
+        <!-- Asumo que tienes un campo 'name' para el interés -->
+        <h3>{{ interest.name }}</h3>
+        
+        <!-- Si tienes un campo 'description', se mostrará aquí -->
+        @if (interest.name) {
+          <p>{{ interest.name }}</p>
+        }
+
+      </div>
+    }
+  </div>
+} @else {
+  <p>Cargando intereses o no hay registros disponibles.</p>
+}

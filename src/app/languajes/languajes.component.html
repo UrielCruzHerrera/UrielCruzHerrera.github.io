@@ -1,0 +1,19 @@
+@if (languajes.length > 0) {
+  <div class="languajes-container">
+    @for (item of languajes; track item.id) {
+      <div class="languaje-card">
+        
+        <!-- Nombre del idioma -->
+        <h3>{{ item.language }}</h3>
+        
+        <!-- Nivel de dominio (ej. Nativo, B2, Intermedio) -->
+        <p class="languaje-proficiency">
+          <strong>Nivel:</strong> {{ item.proficiency }}
+        </p>
+
+      </div>
+    }
+  </div>
+} @else {
+  <p>Cargando idiomas o no hay registros disponibles.</p>
+}
