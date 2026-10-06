@@ -5,9 +5,10 @@
     <h3>{{ header.goalLife }}</h3>
     
     <!-- Asegúrate de que photoUrl ya no tenga etiquetas <a> -->
-    @if (header.photoUrl) {
-      <img [src]="header.photoUrl" alt="Foto de {{ header.name }}" width="150" height="150">
-    }
+   @if (header.photoUrl) {
+  <img [src]="header.photoUrl" alt="Foto de {{ header.name }}" 
+       style="width: 200px; height: 200px; border-radius: 50%; object-fit: cover; border: 3px solid #007bff; box-shadow: 0 4px 8px rgba(0,0,0,0.2); margin-bottom: 15px;">
+}
 
     <p><strong>Email:</strong> {{ header.email }}</p>
     <p><strong>Teléfono:</strong> {{ header.phoneNumber }}</p>
