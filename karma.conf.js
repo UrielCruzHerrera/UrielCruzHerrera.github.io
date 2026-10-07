@@ -5,6 +5,7 @@ module.exports = function (config) {
     frameworks: ['jasmine', '@angular-devkit/build-angular'],
     plugins: [
       require('karma-jasmine'),
+      require('karma-chrome-launcher'),
       require('karma-firefox-launcher'), // <-- Agregamos Firefox
       require('karma-jasmine-html-reporter'),
       require('karma-coverage'),
@@ -31,6 +32,13 @@ module.exports = function (config) {
     // Configuración de los navegadores
     browsers: ['FirefoxHeadless'], // <-- Firefox en modo texto (invisible)
     // browsers: ['Firefox'], // <-- Descomenta esta línea si quieres ver la ventana de Firefox
+
+     customLaunchers: {
+      ChromeHeadlessCI: {
+        base: 'ChromeHeadless',
+        flags: ['--no-sandbox', '--disable-gpu']
+      }
+    },
 
     singleRun: true, // <-- true para que corra, muestre en consola y termine
     restartOnFileChange: false 
