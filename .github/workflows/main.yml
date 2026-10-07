@@ -11,7 +11,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
       - name: Use Node.js 20.x
         uses: actions/setup-node@v4
@@ -22,21 +23,16 @@ jobs:
         run: npm ci
 
       - name: test
-        run: npm test -- --no-watch --no-progress --browsers=ChromeHeadless
-
-      - name: build
-        run: npm run build -- --output-path=docs
-
-          - name: test
         run: npm test -- --no-watch --no-progress --browsers=ChromeHeadlessCI
 
       - name: build
         run: npm run build -- --output-path=docs
-        
-      # ---- NUEVO PASO: Mover archivos de la carpeta browser a la raíz de docs ----
+
       - name: move files
-        run: mv docs/browser/* docs/ && rmdir docs/browser
-      # ---------------------------------------------------------------------------
+        run: |
+          cp -r docs/browser/* docs/
+          rm -rf docs/browser
+
       - name: docker login
         env:
           DOCKER_USER: ${{secrets.DOCKER_USER}}
@@ -59,22 +55,3 @@ jobs:
         run: |
           docker push ${{secrets.DOCKER_USER}}/mycv:${{ github.sha }}
           docker push ${{secrets.DOCKER_USER}}/mycv:latest
-
-      - name: docker login
-        env:
-          DOCKER_USER: ${{secrets.DOCKER_USER}}
-          DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
-        run: |
-          echo "$DOCKER_PASSWORD" | docker login -u $DOCKER_USER --password-stdin
-
-      - name: Download and run the Docker base image
-        run: docker run -d --name http_base httpd
-
-      - name: copy model to the Docker image
-        run: docker cp docs/. http_base:/usr/local/apache2/htdocs
-
-      - name: Build the custom Docker image
-        run: docker commit --change "ENV MODEL_NAME http_base" http_base ${{secrets.DOCKER_USER}}/mycv:${{ github.sha }}
-
-      - name: Docker Push
-        run: docker push ${{secrets.DOCKER_USER}}/mycv:${{ github.sha }}
